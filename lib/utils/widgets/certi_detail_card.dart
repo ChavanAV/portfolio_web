@@ -1,23 +1,49 @@
 import 'package:flutter/material.dart';
 
-import '../../classes_list/all_class_and_list.dart';
+import 'load_indicator.dart';
 
-class CertiInfo extends StatefulWidget {
-  final CertificateList cretificateInfo;
-  const CertiInfo({Key? key, required this.cretificateInfo}) : super(key: key);
+class CertificationInfo extends StatefulWidget {
+  final String imgPath;
+  const CertificationInfo({Key? key, required this.imgPath}) : super(key: key);
 
   @override
-  State<CertiInfo> createState() => _CertiInfoState();
+  State<CertificationInfo> createState() => _CertificationInfoState();
 }
 
-class _CertiInfoState extends State<CertiInfo> {
-
+class _CertificationInfoState extends State<CertificationInfo> {
   BorderRadius? radius;
   Color? color;
   double? height;
   double? width;
   bool? animate;
-  bool? textAppear;
+  late ImageProvider imageProvider;
+  bool isImageLoaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    animate = false;
+    chang(animate!);
+    loadImage();
+  }
+
+  void loadImage() {
+    imageProvider = NetworkImage(widget.imgPath);
+    ImageStream stream = imageProvider.resolve(ImageConfiguration.empty);
+    stream.addListener(ImageStreamListener((_, __) {
+      if (mounted) {
+        setState(() {
+          isImageLoaded = true;
+        });
+      }
+    }, onError: (_, __) {
+      if (mounted) {
+        setState(() {
+          isImageLoaded = false;
+        });
+      }
+    }));
+  }
 
   void chang(bool a) {
     setState(() {
@@ -26,11 +52,7 @@ class _CertiInfoState extends State<CertiInfo> {
         width = 800;
         color = Colors.cyan;
         radius = BorderRadius.circular(40);
-        Future.delayed(const Duration(milliseconds: 300), () {
-          setState(() {
-            textAppear = true;
-          });
-        });
+        Future.delayed(const Duration(milliseconds: 300), () {});
       } else {
         height = 370;
         width = 370;
@@ -38,14 +60,6 @@ class _CertiInfoState extends State<CertiInfo> {
         radius = BorderRadius.circular(300);
       }
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    animate = false;
-    textAppear = false;
-    chang(animate!);
   }
 
   @override
@@ -62,23 +76,27 @@ class _CertiInfoState extends State<CertiInfo> {
         setState(() {
           animate = false;
           chang(animate!);
-          textAppear = false;
         });
       },
       child: Container(
-        height: (widthSize > 800 )? 600 : 400,
+        height: (widthSize > 800) ? 600 : 400,
         width: 800,
         margin: const EdgeInsets.all(10),
         child: Align(
-          alignment: const Alignment(0, 0),
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 270),
-            height: height! + 100,
-            child: Image(
-                image: AssetImage(widget.cretificateInfo.imgPath),
-          ),
-        )
-        ),
+            alignment: const Alignment(0, 0),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 270),
+              height: height! + 100,
+              child: isImageLoaded
+                  ? Image(
+                      image: imageProvider,
+                    )
+                  : Container(
+                      margin: EdgeInsets.symmetric(
+                          horizontal: (widthSize > 1100) ? 200 : 50),
+                      child: const LoadIndicator(),
+                    ),
+            )),
       ),
     );
   }

@@ -6,8 +6,6 @@ import 'package:rive/rive.dart';
 
 import '../../resourses/new_provider.dart';
 import '../widgets/icon_btn.dart';
-import '../widgets/skills_card.dart';
-import '../widgets/tool_tip.dart';
 
 class BgDecoration {
   ///This is the rive animation video assets path
@@ -28,132 +26,114 @@ class BgDecoration {
 
 class AlignWidget {
   ///This is my profile image
-  Container profileImg(double heightSize, double widthSize) {
-    return Container(
-      height: heightSize,
-      width: widthSize,
-      margin: const EdgeInsets.only(top: 5),
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.values[2],
-              image: const AssetImage(
-                "assets/images/prof_pic.jpg",
-              )),
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
-          boxShadow: const [
-            BoxShadow(
-              offset: Offset(0, 0),
-              color: Colors.black,
-              blurStyle: BlurStyle.normal,
-              blurRadius: 3,
-              spreadRadius: 0,
-            )
-          ]),
+  Column profileImg(double heightSize, double widthSize,
+      Map<String, dynamic> data, Size size) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: (size.width > 1100) ? 100 : 0,
+        ),
+        Container(
+          height: heightSize,
+          width: widthSize,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  fit: BoxFit.values[2],
+                  image: NetworkImage(
+                    data['MyImageUrl'].toString(),
+                  )),
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              border: Border.all(color: Colors.black)),
+        ),
+        SizedBox(
+          height: (size.width > 1100) ? 100 : 50,
+        ),
+        ElevatedButton(
+            style: const ButtonStyle(
+                fixedSize: MaterialStatePropertyAll(Size.fromWidth(250)),
+                backgroundColor: MaterialStatePropertyAll(Colors.redAccent),
+                overlayColor: MaterialStatePropertyAll(Colors.orange),
+                shape: MaterialStatePropertyAll(
+                    StadiumBorder(side: BorderSide(color: Colors.grey)))),
+            onPressed: () {
+              Launch().openDocument(data['ResumeUrl'].toString());
+            },
+            child: const Text("View Resume")),
+      ],
     );
   }
 
-  Column profileDescription(
-      double titleSize, double descrSize, snapshot, heightSize) {
+  Column profileDescription(double titleSize, double descrSize, heightSize,
+      Map<String, dynamic> data) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const SizedBox(
-          height: 25,
-        ),
-        RichText(
-          textAlign: TextAlign.center,
-          text: TextSpan(children: [
-            TextSpan(
-              text: "Hi it's, Akshay Chavan\n",
-              style: TextStyle(
-                  fontSize: titleSize,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600),
-            ),
-            TextSpan(
-              text: "As a Computer Science student\n"
-                  "I want to become a skilled developer with various programming skills.",
-              style: TextStyle(
-                  fontSize: descrSize + 2,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500),
-            )
-          ]),
-        ),
-        const SizedBox(
-          height: 25,
-        ),
-        Text("Connect with",
-            style: TextStyle(
-              fontSize: descrSize,
+        Text(
+          "${data['MyName'].toString()}\n",
+          style: TextStyle(
+              fontSize: titleSize,
               color: Colors.black,
-              fontWeight: FontWeight.w600,
-            )),
-        const SizedBox(
-          height: 25,
+              fontWeight: FontWeight.w600),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Text(
+            data['ProfileDescription'].toString(),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: descrSize + 2,
+                color: Colors.black,
+                fontWeight: FontWeight.w500),
+          ),
+        ),
+        Column(
           children: [
-            HoverIconButton(
-              press: () =>
-                  Launch().launchurl('linkedin.com', '/in/chavan-akshay5080'),
-              icon: const FaIcon(FontAwesomeIcons.linkedin,
-                  size: 40, color: Colors.blue),
-            ),
             const SizedBox(
-              width: 50,
+              height: 125,
             ),
-            HoverIconButton(
-              press: () => Launch().launchurl('github.com', '/ChavanAV'),
-              icon: const FaIcon(FontAwesomeIcons.github,
-                  size: 40, color: Colors.black),
-            ),
+            const Text("Connect with",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w600,
+                )),
             const SizedBox(
-              width: 50,
+              height: 25,
             ),
-            HoverIconButton(
-              press: () => Launch()
-                  .launchurl('facebook.com', '/profile.php?id=100041791265250'),
-              icon: const FaIcon(FontAwesomeIcons.facebook,
-                  size: 40, color: Colors.blue),
-            )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                HoverIconButton(
+                  press: () =>
+                      Launch().launchEmail('akshaychavan5080@gmail.com'),
+                  icon: const FaIcon(FontAwesomeIcons.envelope,
+                      size: 40, color: Colors.red),
+                ),
+                HoverIconButton(
+                  press: () => Launch().launchWhatsApp('8805855080'),
+                  icon: const FaIcon(FontAwesomeIcons.whatsapp,
+                      size: 40, color: Color(0XFF019267)),
+                ),
+                HoverIconButton(
+                  press: () => Launch().openDocument(
+                      'https://www.linkedin.com/in/chavan-akshay5080/'),
+                  icon: const FaIcon(FontAwesomeIcons.linkedin,
+                      size: 40, color: Colors.blue),
+                ),
+                HoverIconButton(
+                  press: () =>
+                      Launch().openDocument('https://github.com/ChavanAV'),
+                  icon: const FaIcon(FontAwesomeIcons.github,
+                      size: 40, color: Colors.black),
+                ),
+              ],
+            ),
           ],
         ),
-        const SizedBox(
-          height: 40,
-        ),
-        Text(
-          "Skills",
-          style: TextStyle(
-            fontSize: descrSize,
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const SizedBox(
-          height: 25,
-        ),
-        SizedBox(
-          height: heightSize * 0.12,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: snapshot.data!.docs.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: ToolTip(
-                    msg: snapshot.data!.docs[index]['Skills'].toString(),
-                    child: SkillsCard(
-                      img: snapshot.data!.docs[index]['SkillImage'].toString(),
-                      skillName:
-                          snapshot.data!.docs[index]['SkillName'].toString(),
-                    )),
-              );
-            },
-          ),
-        )
       ],
     );
   }

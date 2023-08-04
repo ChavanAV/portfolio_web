@@ -22,19 +22,18 @@ class _WebScreenState extends State<WebScreen> {
               body: Stack(children: [
                 bgDecoration.rivImg(),
                 // bgDecoration.bgOpacity(),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      (heightSize > 200) ? const SideBarAnim() : Container(),
-                      Expanded(
-                          child: indexProviderModel
-                              .pages[indexProviderModel.currentIndex]),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                    ],
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    (heightSize > 200) ? const SideBarAnim() : Container(),
+                    Expanded(
+                      child: indexProviderModel
+                          .pages[indexProviderModel.currentIndex],
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                  ],
                 ),
               ]),
             ));

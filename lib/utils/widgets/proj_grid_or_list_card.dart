@@ -1,25 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
+import '../../screens/project_detail_screen.dart';
 import '../decoratio.dart';
 import '../hover_effect/card.dart';
 
-class ShowProjInfoCard extends StatelessWidget {
+class ShowProjInfoCard extends StatefulWidget {
   final int index;
-  final ItemScrollController itemScrollController;
   final Map<String, dynamic> snapshot;
   const ShowProjInfoCard(
-      {Key? key,
-      required this.index,
-      required this.itemScrollController,
-      required this.snapshot})
+      {Key? key, required this.index, required this.snapshot})
       : super(key: key);
 
-  jumpTo(int index) {
-    itemScrollController.scrollTo(
-        index: index + 1,
-        alignment: BorderSide.strokeAlignCenter,
-        duration: const Duration(milliseconds: 500));
+  @override
+  State<ShowProjInfoCard> createState() => _ShowProjInfoCardState();
+}
+
+class _ShowProjInfoCardState extends State<ShowProjInfoCard> {
+  late ImageProvider imageProvider;
+  bool isImageLoaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    loadImage();
+  }
+
+  void loadImage() {
+    imageProvider = NetworkImage(widget.snapshot['ShowCaseImage']);
+    ImageStream stream = imageProvider.resolve(ImageConfiguration.empty);
+    stream.addListener(ImageStreamListener((_, __) {
+      if (mounted) {
+        setState(() {
+          isImageLoaded = true;
+        });
+      }
+    }, onError: (_, __) {
+      if (mounted) {
+        setState(() {
+          isImageLoaded = false;
+        });
+      }
+    }));
   }
 
   @override
@@ -31,10 +52,8 @@ class ShowProjInfoCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            image: DecorationImage(
-                fit: BoxFit.fitHeight,
-                image: NetworkImage(snapshot['ShowCaseImage'])),
-            gradient: gradient(index),
+            image: DecorationImage(fit: BoxFit.fitHeight, image: imageProvider),
+            gradient: gradient(widget.index),
             boxShadow: const [
               BoxShadow(
                 offset: Offset(0, 0),
@@ -48,10 +67,9 @@ class ShowProjInfoCard extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                  height:
-                      (widthSize > 1300) ? heightSize * 0.5 : heightSize * 0.5,
+                  height: (widthSize < 1100) ? heightSize * 0.5 : heightSize,
                   width:
-                      (widthSize > 1100) ? widthSize * 0.18 : widthSize * 0.4,
+                      (widthSize > 1100) ? widthSize * 0.13 : widthSize * 0.4,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.7),
@@ -65,13 +83,21 @@ class ShowProjInfoCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(snapshot['ProjectName'].toString(),
+                        Text(widget.snapshot['ProjectName'].toString(),
                             style: appnamestyle),
                         const SizedBox(
                           height: 15,
                         ),
                         ElevatedButton(
-                            onPressed: () => jumpTo(index),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProjectDetailScreen(
+                                      snapshot: widget.snapshot,
+                                    ),
+                                  ));
+                            },
                             style: const ButtonStyle(
                               shape: MaterialStatePropertyAll(StadiumBorder(
                                   side: BorderSide(

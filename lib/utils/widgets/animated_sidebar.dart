@@ -19,8 +19,8 @@ class _SideBarAnimState extends State<SideBarAnim> {
       text: 'Profile',
     ),
     SidebarItem(
-      icon: Icons.paste_sharp,
-      text: 'Education',
+      icon: Icons.dashboard_customize_outlined,
+      text: 'Skills',
     ),
     SidebarItem(
       icon: Icons.install_mobile,
@@ -35,19 +35,20 @@ class _SideBarAnimState extends State<SideBarAnim> {
       text: 'Achievements',
     ),
     SidebarItem(
-      icon: Icons.contact_page,
-      text: 'Resume',
+      icon: Icons.paste_sharp,
+      text: 'Education',
     ),
   ];
   bool isExpand = false;
 
   @override
   Widget build(BuildContext context) {
-    if (MediaQuery.of(context).size.width > 1100) {
+    final size = MediaQuery.of(context).size;
+    if (size.width > 1100) {
       setState(() {
         isExpand = true;
       });
-    } else if (MediaQuery.of(context).size.width < 800) {
+    } else if (size.width < 800) {
       setState(() {
         isExpand = true;
       });
@@ -64,32 +65,23 @@ class _SideBarAnimState extends State<SideBarAnim> {
         items: items,
         selectedIndex: indexProviderModel.currentIndex,
         autoSelectedIndex: false,
-        onItemSelected: (index) =>
-            setState(() => indexProviderModel.grantIndex(index)),
+        onItemSelected: (index) {
+          (size.width > 800)
+              ? setState(() {
+                  indexProviderModel.grantIndex(index);
+                })
+              : setState(() {
+                  indexProviderModel.grantIndex(index);
+                  Navigator.pop(context);
+                });
+        },
         duration: const Duration(milliseconds: 700),
         frameDecoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            tileMode: TileMode.repeated,
-            colors: [
-              Colors.white,
-              Colors.cyan.shade50,
-            ],
-          ),
+          color: (size.width > 800) ? Colors.transparent : Colors.white,
           borderRadius: const BorderRadius.only(
             topRight: Radius.circular(15),
             bottomRight: Radius.circular(15),
           ),
-          boxShadow: const [
-            BoxShadow(
-              offset: Offset(0, 5),
-              color: Colors.black45,
-              blurStyle: BlurStyle.normal,
-              blurRadius: 5,
-              spreadRadius: 0,
-            )
-          ],
         ),
         minSize: 90,
         maxSize: 250,

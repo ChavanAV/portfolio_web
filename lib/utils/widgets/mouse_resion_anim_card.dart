@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MouseRegionAnimCard extends StatefulWidget {
-  // final int index;
   final Map<String, dynamic> snapshot;
-  const MouseRegionAnimCard(
-      {Key? key,
-      // required this.index,
-      required this.snapshot})
+  const MouseRegionAnimCard({Key? key, required this.snapshot})
       : super(key: key);
 
   @override

@@ -19,7 +19,6 @@ class _TabScreenLayoutState extends State<TabScreenLayout> {
         builder: (context, indexProviderModel, child) => Scaffold(
               body: Stack(children: [
                 bgDecoration.rivImg(),
-                bgDecoration.bgOpacity(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

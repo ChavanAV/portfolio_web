@@ -1,14 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:portfolio_web/layout_screen/mobile_screen.dart';
-import 'package:portfolio_web/layout_screen/responsiv_layout.dart';
-import 'package:portfolio_web/layout_screen/tab_screen.dart';
 import 'package:portfolio_web/resourses/getx_provider.dart';
 import 'package:portfolio_web/resourses/new_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'layout_screen/mobile_screen.dart';
+import 'layout_screen/responsiv_layout.dart';
+import 'layout_screen/tab_screen.dart';
 import 'layout_screen/web_screen.dart';
 
 void main() async {
@@ -32,31 +31,20 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final MyController myController = Get.put(MyController());
-  final educationInfoStream =
-      FirebaseFirestore.instance.collection("Education");
-  final experienceInfoStream =
-      FirebaseFirestore.instance.collection("Experience");
-  final skillInfoStream = FirebaseFirestore.instance.collection("Skills");
-  final projectInfoStream = FirebaseFirestore.instance.collection("Projects");
+
   @override
   void initState() {
     super.initState();
     getData();
   }
 
-  getData() async {
-    await myController.educationInfo(
-      educationInfoStream.get(),
-    );
-    await myController.experienceInfo(
-      experienceInfoStream.get(),
-    );
-    await myController.skillInfo(
-      skillInfoStream.get(),
-    );
-    await myController.projectInfo(
-      projectInfoStream.get(),
-    );
+  getData() {
+    myController.educationInfo();
+    myController.experienceInfo();
+    myController.skillInfo();
+    myController.projectInfo();
+    myController.certificationInfo();
+    myController.profileInfo();
   }
 
   @override
