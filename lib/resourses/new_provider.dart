@@ -29,7 +29,7 @@ class Launch {
   Future<void> openDocument(myUrl) async {
     if (!await launchUrlString(
       myUrl,
-      mode: LaunchMode.platformDefault,
+      mode: LaunchMode.externalApplication,
     )) {
       throw 'Url Not Found.';
     }
@@ -39,7 +39,7 @@ class Launch {
     final url = "https://wa.me/$phoneNumber";
     if (!await launchUrlString(
       url,
-      mode: LaunchMode.platformDefault,
+      mode: LaunchMode.externalApplication,
     )) {
       throw 'Url Not Found.';
     }
@@ -53,7 +53,7 @@ class Launch {
 
     if (!await launchUrlString(
       emailLaunchUri.toString(),
-      mode: LaunchMode.platformDefault,
+      mode: LaunchMode.externalApplication,
     )) {
       throw 'Url Not Found.';
     }

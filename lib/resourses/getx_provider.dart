@@ -21,9 +21,11 @@ class MyController extends GetxController {
       FirebaseFirestore.instance.collection("Experience").get();
   final skillInfoStream = FirebaseFirestore.instance.collection("Skills").get();
   final projectInfoStream =
-      FirebaseFirestore.instance.collection("Projects").get();
-  final certificationInfoStream =
-      FirebaseFirestore.instance.collection("Certification").get();
+      FirebaseFirestore.instance.collection("Projects").orderBy("Order").get();
+  final certificationInfoStream = FirebaseFirestore.instance
+      .collection("Certification")
+      .orderBy("Order")
+      .get();
   final profileInfoStream =
       FirebaseFirestore.instance.collection("Profile").get();
 

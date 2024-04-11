@@ -53,7 +53,13 @@ class _ShowProjInfoCardState extends State<ShowProjInfoCard> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             image: DecorationImage(fit: BoxFit.fitHeight, image: imageProvider),
-            gradient: gradient(widget.index),
+            gradient: const LinearGradient(colors: [
+              Colors.green,
+              Colors.lightGreenAccent,
+              Colors.deepOrangeAccent,
+              Colors.blueGrey,
+              Colors.deepPurple
+            ]),
             boxShadow: const [
               BoxShadow(
                 offset: Offset(0, 0),

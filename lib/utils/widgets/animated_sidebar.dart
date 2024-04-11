@@ -102,7 +102,7 @@ class _SideBarAnimState extends State<SideBarAnim> {
             fontSize: 22,
             fontWeight: FontWeight.w700,
             color: Color.fromRGBO(3, 91, 97, 1)),
-        headerText: ' Portfolio',
+        headerText: ' Behance',
       ),
     );
   }
