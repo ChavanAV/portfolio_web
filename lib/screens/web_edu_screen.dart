@@ -33,7 +33,7 @@ class WebEducationScreen extends StatelessWidget {
                                 crossAxisCount: 2,
                                 crossAxisSpacing: 0,
                                 mainAxisSpacing: 0,
-                                childAspectRatio: 9 / 5),
+                                childAspectRatio: 8 / 4),
                         itemBuilder: (context, index) {
                           return EduInfoCard(
                             ///This is for previous method for data from list

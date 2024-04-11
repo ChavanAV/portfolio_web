@@ -16,12 +16,10 @@ class _WebScreenState extends State<WebScreen> {
   @override
   Widget build(BuildContext context) {
     final heightSize = MediaQuery.of(context).size.height;
-    final widthSize = MediaQuery.of(context).size.width;
     return Consumer<IndexProvider>(
         builder: (context, indexProviderModel, child) => Scaffold(
               body: Stack(children: [
                 bgDecoration.rivImg(),
-                // bgDecoration.bgOpacity(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

@@ -36,8 +36,100 @@
     var serviceWorkerVersion = null;
   </script>
   <script src="flutter.js" defer></script>
+
+  <style>
+   body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f1f1f1;
+}
+
+.loader {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+/*     background: linear-gradient(#f07e6e, #84cdfa, #5ad1cd); */
+    animation: animate 2.5s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+/*     background: linear-gradient(#f07e6e, #84cdfa,#5ad1cd); */
+   background: linear-gradient(#62CDFF,#AA77FF, #FF7B54);
+}
+
+.loader span:nth-child(1) {
+    filter: blur(5px);
+}
+
+.loader span:nth-child(2) {
+    filter: blur(20px);
+}
+
+.loader span:nth-child(3) {
+    filter: blur(35px);
+}
+
+.loader span:nth-child(4) {
+    filter: blur(50px);
+}
+
+.loader:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+/*     background: #f1f1f1; */
+/*     border: solid white 10px; */
+    border-radius: 50%;
+}
+</style>
+
+
 </head>
 <body>
+
+<div id="loading_indicator" class="loader">
+  <span></span>
+  <span></span>
+</div>
+
+
+
+
+<script>
+    if (navigator.userAgentData) {
+      const uaData = navigator.userAgentData;
+      const browserName = uaData.brands[0].brand;
+      const browserVersion = uaData.brands[0].version;
+      const osName = uaData.platform;
+      console.log(`Browser: ${browserName} ${browserVersion}, OS: ${osName}`);
+    } else {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      console.log(`Fallback User Agent: ${userAgent}`);
+      alert('Your browser does not support the latest user agent data. Some features may be limited in this browser.');
+    }
+  </script>
+
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"  type="application/javascript"></script>
 <script src="main.dart.js" type="application/javascript"></script>
 <script type="module">
@@ -52,27 +144,38 @@
   projectId: "portfolio-web-40fb9",
   storageBucket: "portfolio-web-40fb9.appspot.com",
   messagingSenderId: "569927544873",
-  appId: "1:569927544873:web:a32261a88efb0007ab2c38"
+  appId: "1:569927544873:web:908285a3b5d6e778ab2c38"
 };
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
 </script>
 
 
-  <script>
-    window.addEventListener('load', function(ev) {
-      // Download main.dart.js
-      _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
-        },
-        onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
-            appRunner.runApp();
-          });
-        }
-      });
-    });
-  </script>
+<!--  <script>-->
+<!--    window.addEventListener('load', function(ev) {-->
+<!--      // Download main.dart.js-->
+<!--      _flutter.loader.loadEntrypoint({-->
+<!--        serviceWorker: {-->
+<!--          serviceWorkerVersion: serviceWorkerVersion,-->
+<!--        },-->
+<!--        onEntrypointLoaded: function(engineInitializer) {-->
+<!--          engineInitializer.initializeEngine().then(function(appRunner) {-->
+<!--            appRunner.runApp();-->
+<!--          });-->
+<!--        }-->
+<!--      });-->
+<!--    });-->
+<!--  </script>-->
+
+<script>
+ window.onload = function(){
+        setTimeout(function(){
+            var ld = document.getElementById("loading_indicator");
+            if(ld){
+                ld.remove();
+            }
+        },6500);
+    };
+</script>
 </body>
 </html>

@@ -3,6 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MyController extends GetxController {
+  @override
+  void onInit() {
+    super.onInit();
+    profileInfo();
+    skillInfo();
+    projectInfo();
+    certificationInfo();
+    experienceInfo();
+    educationInfo();
+  }
+
+  RxBool isLoading = true.obs;
   final educationInfoStream =
       FirebaseFirestore.instance.collection("Education").get();
   final experienceInfoStream =

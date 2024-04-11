@@ -35,7 +35,7 @@ class WExperienceScreen extends StatelessWidget {
                               crossAxisCount: 2,
                               crossAxisSpacing: 0,
                               mainAxisSpacing: 0,
-                              childAspectRatio: 9 / 5),
+                              childAspectRatio: 8 / 4),
                       itemBuilder: (context, index) {
                         final snap = snapshot.data!.docs[index].data();
                         return expCard(widthSize, snap);

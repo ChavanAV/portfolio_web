@@ -17,9 +17,9 @@ class _MobileScreenState extends State<MobileScreen> {
   @override
   Widget build(BuildContext context) {
     final heightSize = MediaQuery.of(context).size.height;
-    final widthSize = MediaQuery.of(context).size.width;
     return Consumer<IndexProvider>(
       builder: (context, indexProviderModel, child) => Stack(
+        alignment: Alignment.center,
         children: [
           bgDecoration.rivImg(),
           Scaffold(

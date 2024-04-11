@@ -17,41 +17,36 @@ class EduInfoCard extends StatelessWidget {
         margin: 25,
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Text(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
                   eduInfoOf['Date'].toString(),
                   style: yearStyle,
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Text(
+                Text(
                   eduInfoOf['CourseName'].toString(),
                   style: titleStyle,
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Text(
+                Text(
+                  '${eduInfoOf['CollegeName'].toString()} ',
+                  style: collegeNameStyle,
+                ),
+                Text(
                   "Credits: "
                   '${eduInfoOf['Marks'].toString()} '
                   "SGPA: "
                   '${eduInfoOf['SGPA'].toString()}',
                   style: clgStyle,
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Text(
+                Text(
                   eduInfoOf['Description'].toString(),
                   style: clgStyle,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

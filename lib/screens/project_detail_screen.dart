@@ -23,17 +23,17 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(
-                    Icons.close,
-                    size: 30,
-                  )),
-              const SizedBox(
-                height: 10,
-              ),
+              // IconButton(
+              //     onPressed: () {
+              //       Navigator.pop(context);
+              //     },
+              //     icon: const Icon(
+              //       Icons.close,
+              //       size: 30,
+              //     )),
+              // const SizedBox(
+              //   height: 10,
+              // ),
               SizedBox(
                 height: 590,
                 child: Row(
