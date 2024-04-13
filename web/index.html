@@ -132,7 +132,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"  type="application/javascript"></script>
 <script src="main.dart.js" type="application/javascript"></script>
-<script type="module">
+<!--<script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
   // TODO: Add SDKs for Firebase products that you want to use
@@ -146,6 +146,25 @@
   messagingSenderId: "569927544873",
   appId: "1:569927544873:web:908285a3b5d6e778ab2c38"
 };
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script> -->
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyAZqKq9rVoRhajtOthgdx6wRl_Gcdhb3bk",
+    authDomain: "chavan-akshay.firebaseapp.com",
+    projectId: "chavan-akshay",
+    storageBucket: "chavan-akshay.appspot.com",
+    messagingSenderId: "238422978254",
+    appId: "1:238422978254:web:d9d369a75e6323799bea9f"
+  };
+
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
 </script>

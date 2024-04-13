@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
-class ResponsivLayout extends StatelessWidget {
+class ResponsiveLayout extends StatelessWidget {
   final Widget webScreenLayout;
   final Widget mobileScreenLayout;
   final Widget tabScreenLayout;
-  const ResponsivLayout(
+  const ResponsiveLayout(
       {Key? key,
       required this.webScreenLayout,
       required this.mobileScreenLayout,

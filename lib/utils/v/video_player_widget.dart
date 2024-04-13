@@ -27,7 +27,6 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
             )
           ],
         );
-
   Widget buildVideo() => buildVideoPlayer();
 
   Widget buildVideoPlayer() => Center(

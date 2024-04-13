@@ -30,7 +30,7 @@ class SkillScreen extends StatelessWidget {
               (heightSize > 200)
                   ? const Padding(
                       padding: EdgeInsets.only(top: 10.0),
-                      child: Text("Tap to see details.",
+                      child: Text("Tap to see details",
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w500)),
                     )

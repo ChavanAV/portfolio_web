@@ -23,17 +23,14 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // IconButton(
-              //     onPressed: () {
-              //       Navigator.pop(context);
-              //     },
-              //     icon: const Icon(
-              //       Icons.close,
-              //       size: 30,
-              //     )),
-              // const SizedBox(
-              //   height: 10,
-              // ),
+              IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    size: 25,
+                  )),
               SizedBox(
                 height: 590,
                 child: Row(
@@ -46,9 +43,27 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                         margin: const EdgeInsets.only(right: 20.0),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.black)),
-                        child: MyVideoPlayer(
-                          documentUrl: widget.snapshot['vidUrl'].toString(),
-                        ),
+                        child: (widget.snapshot['vidUrl'].toString() != "")
+                            ? MyVideoPlayer(
+                                documentUrl:
+                                    widget.snapshot['vidUrl'].toString(),
+                              )
+                            : const Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Image(
+                                      image:
+                                          AssetImage("assets/images/icon.png")),
+                                  Center(
+                                    child: Text(
+                                      "Video Not Available",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                ],
+                              ),
                       ),
                     ),
                     (size.width > 1100)
@@ -105,9 +120,9 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                     )
                   : Container(),
               const SizedBox(
-                height: 30,
+                height: 3,
               ),
-              const Text("Application Glance",
+              const Text("Application Glance  ↓",
                   style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700)),
               const SizedBox(
                 height: 30,

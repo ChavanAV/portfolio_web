@@ -14,10 +14,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
       options: const FirebaseOptions(
-          apiKey: "AIzaSyAkIH2UISQ2uI5mCQqbYQ9VUg0VmtL56Rc",
-          projectId: "portfolio-web-40fb9",
-          messagingSenderId: "569927544873",
-          appId: "1:569927544873:web:908285a3b5d6e778ab2c38"));
+          apiKey: "AIzaSyAZqKq9rVoRhajtOthgdx6wRl_Gcdhb3bk",
+          projectId: "chavan-akshay",
+          messagingSenderId: "238422978254",
+          appId: "1:238422978254:web:d9d369a75e6323799bea9f"));
   runApp(const MyApp());
 }
 
@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(scaffoldBackgroundColor: Colors.white10),
         title: "Akshay Chavan",
-        home: const ResponsivLayout(
+        home: const ResponsiveLayout(
           webScreenLayout: WebScreen(),
           tabScreenLayout: TabScreenLayout(),
           mobileScreenLayout: MobileScreen(),
